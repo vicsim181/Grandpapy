@@ -2,3 +2,4 @@ envp7/
 *.pyc
 __pycache__
 .flaskenv
+.gitattributes
