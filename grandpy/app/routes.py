@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app
-from .parser import parse
+from .input_parser import parse
 
 
 @app.route('/')
