@@ -23,4 +23,12 @@ def parse(sentence):
         for element in word_split:
             if element not in stopwords and element not in (' ', ''):
                 output.append(element)
-    return output
+    output2 = '+'.join(output)
+    print("output: " + str(output))
+    print("output2 :" + str(output2))
+    return output2
+
+
+# parse("peut-être qu'il y a parfois trop de mots pour que la requête puisse fonctionner correctement !! Vérifions en ajoutant d'autres mots ?? , et de la ponctuation. Mais pour l'instant ça va mais on ne sait jamais, rajoutons-en plus encore !! AHAHA sait-on jamais si je cherche la Tour Eiffel ")
+# parse("Les adresses c'est vraiment très intéressant comme l'est le football par exemple avec Santiago Bernabeu à Madrid en Espagne")
+parse("Salut grandpy! Comment s'est passé ta soirée avec Grandma hier soir? Au fait, pendant que j'y pense, pourrais-tu m'indiquer où se trouve le musée d'art et d'histoire de Fribourg, s'il te plaît?")

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GrandPy Robot</title>
+</head>
+    
+<body>
+    <header>
+        <h1>Voici une carte pour afficher le résultat d'une requête !</h1>
+    </header>
+    <div id="map"></div>
+    <iframe width="600" height="450" frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAstsdkCuu_k4i-V4ZNVW6WTZkYEeMvV1c&q={{ input }}"
+        allowfullscreen>
+    </iframe>
+    <h3>Pour l'instant elle ne fonctionne pas tout le temps...</h3>
+    <p>Plus de fonctionnalités à venir bientôt.</p>
+    <p>Voici l'input:  {{ input }}</p>
+</body>
+
+</html>
