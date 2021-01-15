@@ -1,21 +1,20 @@
-from flask import render_template
+import json
+from flask import render_template, redirect
+from flask.helpers import url_for
 from app import app
 from .input_parser import parse
+from flask import jsonify
 
 
-@app.route('/')
-@app.route('/home/')
+@app.route('/', methods=('GET', 'POST'))
+@app.route('/home/', methods=('GET', 'POST'))
 def home():
     return render_template('home.html')
 
 
-@app.route('/api/message/<message>', methods=['GET'])
-def api(message):
-    return str(parse(message))
-
-
-@app.route('/map/<search>')
-def map(search):
-    input = parse(search)
-    print("input: " + str(input))
-    return render_template('maps.html', input=str(input))
+@app.route('/ajax/<message>', methods=('GET', 'POST'))
+def ajax(message):
+    parsed = parse(message)
+    return jsonify({
+        "result": parsed
+    })
