@@ -10,7 +10,7 @@ keywords = {"mairie", "hôpital", "clinique", "pompiers", "commissariat", "stade
             "bar", "cabaret", "place", "parc", "archéologie", "zoologie", "architecture", "moderne", "contemporain"}
 
 
-with open('D:/Github/P7/grandpy/app/stopwords.json', encoding='utf-8') as file:
+with open('app/stopwords.json', 'r', encoding='utf-8') as file:
     stopwords = json.load(file)
 
 
