@@ -2,40 +2,58 @@ $(()=> {
     console.log( "ready!" );
 });
 
-// // let send_message = function() {
-// //     let message = $('#form').val();
-// //     $.getJSON(`http://localhost:5000/map/${message}`, (data)=> {
-// //         console.log(data);
-// //     });
-// // }
+let i = 0;
 
-let sendMessage = function() {
+
+let getRequest = function() {
     message = $('#form').val();
-    const messageSection = $('#messages');
-    console.log(message);
-    let para = $.add('p');
-    let node = document.createTextNode(message);
-    para.appendChild(node);
-    messageSection.appendChild(para);
+    $('#messages').prepend('<p>' + message);
+    const treatedMessage = message.replace('?', ' ')
+    return treatedMessage;
 }
 
-// let getRequest = function() {
 
-// }
+let sendRequest = function(request) {
+    $.post(`http://localhost:5000/ajax/${request}`, (data) => {
+        let responseMaps = data['response'];
+        console.log('response: ' + responseMaps);
+        showResponse(responseMaps);
+        return responseMaps;    
+    });
+}
 
-// let showResponse = function() {
 
-// }
+let showResponse = function(response) {
+    $('#messages').prepend('<iframe>');
+    $('iframe').attr('id', i);
+    $('#' + i).attr('src', response);
+    $('#' + i).addClass('googlemap');
+    configMaps();
+}
 
-// if ($('#button').trigger(buttonEvent)) function(event) {
-    
-// })
+
+let configMaps = function() {
+    $('.googlemap').attr('width', '400');
+    $('.googlemap').attr('height', '250');
+    $('.googlemap').attr('frameborder', '0');
+    $('.googlemap').attr('style', 'border:0');
+    $('.googlemap').attr('allowfullscreen');
+}
+
+
+let displayMessages = function() {
+    let request = getRequest();
+    let response = sendRequest(request);
+    showResponse(response);
+}
 
 
 $("#button").on('click', function () {
-    // event.preventDefault();
-    // event.stopPropagation();
-    alert('bonjour');
-    sendMessage();
-    
+    displayMessages();
+});
+
+$('#form').on('keypress',function(e) {
+    if(e.which == 13) {
+        displayMessages();
+    }
 });

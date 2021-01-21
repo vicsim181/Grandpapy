@@ -1,5 +1,5 @@
 import json
-from flask import render_template, redirect
+from flask import render_template
 from flask.helpers import url_for
 from app import app
 from .input_parser import parse
@@ -14,7 +14,9 @@ def home():
 
 @app.route('/ajax/<message>', methods=('GET', 'POST'))
 def ajax(message):
+    print(str(message))
     parsed = parse(message)
     return jsonify({
-        "result": parsed
+        "response": f"https://www.google.com/maps/embed/v1/place?key=AIzaSyAstsdkCuu_k4i-V4ZNVW6WTZkYEeMvV1c&q={parsed}"
     })
+

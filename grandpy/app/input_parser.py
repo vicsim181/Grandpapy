@@ -1,9 +1,4 @@
 import json
-import spacy
-
-nlp = spacy.load('fr_core_news_sm')
-doc = nlp("Salut grandpy! Comment s'est passé ta soirée avec Grandma hier soir? Au fait, pendant que j'y pense, pourrais-tu m'indiquer où se trouve le musée d'art et d'histoire de Fribourg, s'il te plaît?")
-
 
 keywords = {"mairie", "hôpital", "clinique", "pompiers", "commissariat", "stade", "école", "collège", "lycée", "université", "faculté",
             "cinéma", "théâtre", "musée", "art", "histoire", "observatoire", "ambassade", "consulat", "restaurant", "bureau", "café",
@@ -30,18 +25,8 @@ def parse(sentence):
         for element in word_split:
             if element not in stopwords and element not in (' ', ''):
                 output.append(element)
-    output = ' '.join(output)
+    output = '+'.join(output)
     return str(output)
-
-
-def essai_spacy():
-    # doc = nlp(parse("Salut grandpy! Comment s'est passé ta soirée avec Grandma hier soir? Au fait, pendant que j'y pense, pourrais-tu m'indiquer où se trouve le musée d'art et d'histoire de Fribourg, s'il te plaît?"))
-    print(doc)
-    for token in doc:
-        if not token.is_stop:
-            print(token.text)
-    for ent in doc.ents:
-        print(ent.text, ent.label_)
 
 
 # parse("peut-être qu'il y a parfois trop de mots pour que la requête puisse fonctionner correctement !! Vérifions en ajoutant d'autres mots ?? , et de la ponctuation. Mais pour l'instant ça va mais on ne sait jamais, rajoutons-en plus encore !! AHAHA sait-on jamais si je cherche la Tour Eiffel ")

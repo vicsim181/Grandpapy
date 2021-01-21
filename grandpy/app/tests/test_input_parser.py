@@ -1,7 +1,5 @@
-import sys
-sys.path.append('..')
-from input_parser import cleaning as cleaning
-from input_parser import parse as parse
+from app.input_parser import cleaning
+from app.input_parser import parse
 
 
 # Testing the capability of the "cleaning" function to actually clean a sentence. 
@@ -16,4 +14,4 @@ def test_cleaning():
 # The apostrophe has to be removed, and the words which contained one split and processed.
 def test_parse():
     message = "Salut, je suis une phrase d'exemple pour tester la fonction parser. Voici une question : Peux-tu, s'il-te-plait Grandpy me donner l'adresse du Stade de France ? Merci !"
-    assert parse(message) == ["donner", "adresse", "stade", "france"]
+    assert parse(message) == "donner+adresse+stade+france"
