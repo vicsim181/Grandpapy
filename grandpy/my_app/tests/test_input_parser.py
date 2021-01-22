@@ -7,7 +7,7 @@ from app.input_parser import parse
 def test_cleaning():
     message = "Salut, je suis une phrase d'exemple pour tester la fonction parser. Voici une question : Peux-tu, s'il-te-plait Grandpy me donner l'adresse du Stade de France ? Merci !"
     message_cleaned = cleaning(message)
-    assert message_cleaned == "salut  je suis une phrase d'exemple pour tester la fonction parser  voici une question   peux tu  s'il te plait grandpy me donner l'adresse du stade de france   merci  "
+    assert message_cleaned == "salut  je suis une phrase d exemple pour tester la fonction parser  voici une question   peux tu  s il te plait grandpy me donner l adresse du stade de france   merci  "
 
 
 # Testing the capability of the "parse" function to separate the words of a sentence.

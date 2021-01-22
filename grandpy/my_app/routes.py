@@ -19,4 +19,3 @@ def ajax(message):
     return jsonify({
         "response": f"https://www.google.com/maps/embed/v1/place?key=AIzaSyAstsdkCuu_k4i-V4ZNVW6WTZkYEeMvV1c&q={parsed}"
     })
-
