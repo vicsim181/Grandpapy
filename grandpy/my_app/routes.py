@@ -4,6 +4,10 @@ from flask.helpers import url_for
 from app import app
 from .input_parser import parse
 from flask import jsonify
+import os
+
+
+gmaps_key = os.environ['google_maps_un']
 
 
 @app.route('/', methods=('GET', 'POST'))
@@ -17,5 +21,5 @@ def ajax(message):
     print(str(message))
     parsed = parse(message)
     return jsonify({
-        "response": f"https://www.google.com/maps/embed/v1/place?key=AIzaSyAstsdkCuu_k4i-V4ZNVW6WTZkYEeMvV1c&q={parsed}"
+        "response": f"https://www.google.com/maps/embed/v1/place?key={gmaps_key}&q={parsed}"
     })
