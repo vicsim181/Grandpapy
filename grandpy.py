@@ -1,2 +1,1 @@
-from app import app
-# changer my_app import app
+from my_app import app

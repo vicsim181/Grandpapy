@@ -3,4 +3,4 @@ envp7/
 __pycache__
 .flaskenv
 .gitattributes
-.vscode
+.vscode/

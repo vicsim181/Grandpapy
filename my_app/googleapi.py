@@ -5,7 +5,7 @@ import os
 from .input_parser import parse
 
 
-gmaps_key = os.environ['google_maps_un']
+gmaps_key = os.environ['google_maps_key']
 
 
 def get_google_geocoding_answer(input_request):

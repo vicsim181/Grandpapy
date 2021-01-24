@@ -1,13 +1,13 @@
 import json
 from flask import render_template
 from flask.helpers import url_for
-from app import app
+from my_app import app
 from .input_parser import parse
 from flask import jsonify
 import os
 
 
-gmaps_key = os.environ['google_maps_un']
+gmaps_key = os.environ['google_maps_key']
 
 
 @app.route('/', methods=('GET', 'POST'))

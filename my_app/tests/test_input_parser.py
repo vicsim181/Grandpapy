@@ -1,5 +1,5 @@
-from app.input_parser import cleaning
-from app.input_parser import parse
+from my_app.input_parser import cleaning
+from my_app.input_parser import parse
 
 
 # Testing the capability of the "cleaning" function to actually clean a sentence. 

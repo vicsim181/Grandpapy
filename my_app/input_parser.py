@@ -5,7 +5,7 @@ import json
 #             "bar", "cabaret", "place", "parc", "archéologie", "zoologie", "architecture", "moderne", "contemporain"}
 
 
-with open('app/stopwords.json', 'r', encoding='utf-8') as file:
+with open('my_app/stopwords.json', 'r', encoding='utf-8') as file:
     stopwords = json.load(file)
 
 
