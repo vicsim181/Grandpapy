@@ -8,27 +8,31 @@ let i = 0;
 let getRequest = function() {
     message = $('#form').val();
     $('#messages').prepend('<p>' + message);
-    const treatedMessage = message.replace('?', ' ')
+    const treatedMessage = encodeURIComponent(message);
+    console.log(treatedMessage);
     return treatedMessage;
 }
 
 
 let sendRequest = function(request) {
     $.post(`http://localhost:5000/ajax/${request}`, (data) => {
-        let responseMaps = data['response'];
-        console.log('response: ' + responseMaps);
-        showResponse(responseMaps);
-        return responseMaps;    
+        let responseMaps = data['map'];
+        let responseWiki = data['wiki'];
+        console.log('map: ' + responseMaps,
+                    'wiki: ' + responseWiki);
+        showResponse(responseMaps, responseWiki);
+        return responseMaps, responseWiki;    
     });
 }
 
 
-let showResponse = function(response) {
+let showResponse = function(response1, response2) {
     $('#messages').prepend('<iframe>');
     $('iframe').attr('id', i);
-    $('#' + i).attr('src', response);
+    $('#' + i).attr('src', response1);
     $('#' + i).addClass('googlemap');
     configMaps();
+    $('#messages').prepend('<p>' + response2);
 }
 
 
