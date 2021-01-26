@@ -26,6 +26,6 @@ def ajax(message):
     info_message = search_for_element_to_display(parsed, wiki_answer)
     print(info_message)
     return jsonify({
-        "map": f"https://www.google.com/maps/embed/v1/place?key={gmaps_key}&q={lat},{lng}",
+        "map": f"https://www.google.com/maps/embed/v1/place?key={gmaps_key}&q={parsed}",
         "wiki": info_message
     })

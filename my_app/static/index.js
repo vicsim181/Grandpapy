@@ -27,10 +27,11 @@ let sendRequest = function(request) {
 
 
 let showResponse = function(response1, response2) {
-    $('#messages').prepend('<iframe>');
-    $('iframe').attr('id', i);
+    $('#messages').prepend('<iframe id=' + i + '>');
+    // $('iframe').attr('id', i);
     $('#' + i).attr('src', response1);
     $('#' + i).addClass('googlemap');
+    i ++;
     configMaps();
     $('#messages').prepend('<p>' + response2);
 }
@@ -47,8 +48,8 @@ let configMaps = function() {
 
 let displayMessages = function() {
     let request = getRequest();
-    let response = sendRequest(request);
-    showResponse(response);
+    sendRequest(request);
+    // showResponse(response);
 }
 
 

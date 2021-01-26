@@ -84,17 +84,18 @@ def mock_get_google_geocoding_answer(user_input):
 
 def test_google_api_geocoding_answer(monkeypatch):
     """
-    Ici une réponse json simulée de la fonction interrogeant googlemaps est passée.
-    On teste ici la fonction treat_google_answer() et le rendu à partir du json reçu.
+    In this test we use the fake json answer given by the mock_get_google_geocoding_answer function above.
+    It replaces the answer we get from the GMaps API with the input of 'donner+adresse+stade+france'.
+    We test the function treat_google_answer() which receives the json received from the API and the result it gives us.
     """
     result = treat_geocoding_answer('donner+adresse+stade+france')
     monkeypatch.setattr('my_app.google_api.get_google_geocoding_answer', mock_get_google_geocoding_answer)
     assert result == (48.9244592, 2.3601645)
 
 
-def test_google_api_revers_answer():
-    """
-    Ici on simule la réponse de l'API de Google Maps en lui passant la longitude et latitude obtenue précédement.
-    On teste le traitement qui sera fait de cette réponse.
-    """
-    pass
+# def test_google_api_revers_answer():
+#     """
+#     Ici on simule la réponse de l'API de Google Maps en lui passant la longitude et latitude obtenue précédement.
+#     On teste le traitement qui sera fait de cette réponse.
+#     """
+#     pass
