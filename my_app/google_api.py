@@ -50,6 +50,6 @@ def treat_geocoding_answer(input_request):
     return latitude, longitude
 
 
-# stade_france = 'donner+adresse+stade+france'
+# essai = 'savoir+opéra+garnier+paris'
 
-pprint.pprint(get_google_reverse_geocoding_answer(48.8975156, 2.3833993))
+# pprint.pprint(treat_geocoding_answer(essai))

@@ -29,4 +29,4 @@ def parse(sentence):
     return str(output)
 
 
-# print(parse("peut-être qu'il y a parfois trop de mots pour que la requête puisse fonctionner correctement !! Vérifions en ajoutant d'autres mots ?? , et de la ponctuation. Mais pour l'instant ça va mais on ne sait jamais, rajoutons-en plus encore !! AHAHA sait-on jamais si je cherche la Tour Eiffel "))
+# print(parse("Salut je veux l'adresse du roazhon park de Rennes stp"))
