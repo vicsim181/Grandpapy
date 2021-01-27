@@ -7,7 +7,14 @@ from flask import jsonify
 import os
 
 
-gmaps_key = os.environ['google_maps_key']
+GMAPS_KEY = os.environ['google_maps_key']
+SENTENCES_FIRST_ANSWER = [""]
+SENTENCES_AROUND = ["Je n'ai jamais été visiter cet endroit. Mais j'en connais des choses ! Par exemple, ", "", ""]
+SENTENCES_PLACE = ["Je connais bien cet endroit ! Tiens par exemple, ", ]
+
+
+def random_sentence():
+
 
 
 @app.route('/', methods=('GET', 'POST'))
@@ -22,6 +29,8 @@ def ajax(message):
     lat, lng = treat_geocoding_answer(parsed)
     wiki_answer = wiki_process(lat, lng)
     return jsonify({
-        "map": f"https://www.google.com/maps/embed/v1/place?key={gmaps_key}&q={parsed}",
+        "first_sentence": first_sentence,
+        "map": f"https://www.google.com/maps/embed/v1/place?key={GMAPS_KEY}&q={parsed}",
+        "second_sentence": second_sentence,
         "wiki": wiki_answer
     })

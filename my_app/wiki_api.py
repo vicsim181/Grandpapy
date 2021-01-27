@@ -31,32 +31,23 @@ def get_wiki_answer(lat, lng):
         exit()
 
 
-# def search_for_element_to_display(answer):
-#     """
-#     This function has the objective to determine if the answers we got from Wikipedia are matching with the request.
-#     It checks the words sent to GoogleMaps and the titles of the 10 closest wikipages found around the geographic coordinates sent.
-#     It gives back 
-#     """
-    # results = answer['query']['geosearch']
-    # print(results)
-    # treated_request = request.split('+')
-    # elements_list = []
-    # for index, result in enumerate(results):
-
-        # split_title = result['title'].split(' ')
-        # for word in split_title:
-            # if word.lower() in treated_request:
-                # i += 1
-        # elements_list.append({'title': result['title'],
-                            #   'i': i,
-                            #   'dist': result['dist']})
-    # min_dist, max_i, index_max_i, index_min_dist = 1000, 0, 0, 0
-    # for index, dictionnary in enumerate(elements_list):
-        # if dictionnary['i'] > max_i:
-            # max_i, index_max_i = dictionnary['i'], index
-        # if dictionnary['dist'] < min_dist:
-            # min_dist, index_min_dist = dictionnary['dist'], index
-    # return elements_list, index_max_i, index_min_dist
+def search_for_correspondence(request, answer):
+    """
+    This function has the objective to determine if the answers we got from Wikipedia are matching with the request.
+    It checks the words sent to GoogleMaps and the titles of the 10 closest wikipages found around the geographic coordinates sent.
+    """
+    result = answer['query']['geosearch'][0]['title']
+    print(result)
+    treated_request = request.split('+')
+    i = 0
+    split_title = result['title'].split(' ')
+    for word in split_title:
+        if word.lower() in treated_request:
+            i += 1
+    if i > 1:
+        return 1
+    else:
+        return 0
 
 
 def get_wikipedia_explanations(answer):
@@ -72,12 +63,13 @@ def get_wikipedia_explanations(answer):
     return r['query']['pages'][str(id_page)]['extract']
 
 
-def wiki_process(lat, lng):
+def wiki_process(request, lat, lng):
     """
     """
     one = get_wiki_answer(lat, lng)
+    two = search_for_correspondence(request, one)
     explanations = get_wikipedia_explanations(one)
-    return explanations
+    return explanations, two
 
 
 # pprint.pprint(wiki_process(request, 48.87194,2.33222))
