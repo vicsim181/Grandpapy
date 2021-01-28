@@ -2,13 +2,6 @@ $(()=> {
     console.log( "ready!" );
 });
 
-let i = 0;
-let responseMaps;
-let responseWiki;
-let firstSentence;
-let secondSentence;
-
-
 
 function getRequest() {
     message = $('#form').val();
@@ -19,37 +12,21 @@ function getRequest() {
 }
 
 
-function sendRequest(request) {
+async function sendRequest(request) {
     return $.post(`http://localhost:5000/ajax/${request}`);
-    // return $.ajax({
-    //     'url': `http://localhost:5000/ajax/${request}`,
-        // 'contentType': true,
-        // 'data': request,
-        // 'dataType': 'text',
-        // 'method': 'POST'
-    // })
-    // });
 }
 
 
-function assignResults(data) {
-    responseMaps = data['map'];
-    responseWiki = data['wiki'];
-    firstSentence = data['first_sentence'];
-    secondSentence = data['second_sentence'];
+function showFirstResponse(data) {
+    $('#messages').prepend('<p>' + data['first_sentence'] + data['address'] + '.');
 }
-        // console.log('maps: ' + responseMaps,
-        //             'wiki: ' + responseWiki,
-        //             'first: ' + firstSentence,
-        //             'second: ' + secondSentence);
 
-function showResponse(responseMaps, responseWiki, firstSentence, secondSentence) {
-    $('#messages').prepend('<p>' + firstSentence);
-    $('#messages').prepend('<iframe id=' + i + '>');
-    $('#' + i).attr('src', responseMaps);
-    $('#' + i).addClass('googlemap');
-    i ++;
-    $('#messages').prepend('<p>' + secondSentence + responseWiki);
+
+function showSecondResponse(data) {
+    let iframe = $('<iframe>')
+    $('#messages').prepend(iframe);
+    iframe.attr('src', data['map']).addClass('googlemap');
+    $('#messages').prepend('<p>' + data['second_sentence'] + data['wiki']);
     configMaps();
 }
 
@@ -63,32 +40,29 @@ function configMaps() {
 }
 
 
-function failProcess() {
-    console.log('ERREUR, ça ne marche pas !');
-}
+// async function displayMessages() {
+//     let request = getRequest();
+//     let data = await sendRequest(request);
+//     showFirstResponse(data);
+//     showSecondResponse(data);
+//     setTimeout(console.log('10 secondes'), 10000);
+// }
 
 
-function displayMessages() {
-    let request = getRequest()
-    sendRequest(request)
-    .then(data => assignResults(data))
-    .then(console.log('maps: ' + responseMaps,
-                      'wiki: ' + responseWiki,
-                      'first: ' + firstSentence,
-                      'second: ' + secondSentence))
-    .then(showResponse)
-    .catch(failProcess);
-    // sendRequest(request)
-    // showResponse(responseMaps, responseWiki, firstSentence, secondSentence);
-}
-
-
-$("#button").on('click', function () {
-    displayMessages();
+$("#button").on('click', async function () {
+    let request = getRequest();
+    let data = await sendRequest(request);
+    showFirstResponse(data);
+    showSecondResponse(data);
+    setTimeout(console.log('10 secondes'), 10000);
 });
 
-$('#form').on('keypress',function(e) {
+$('#form').on('keypress',async function(e) {
     if(e.which == 13) {
-        displayMessages();
+        let request = getRequest();
+        let data = await sendRequest(request);
+        showFirstResponse(data);
+        showSecondResponse(data);
+        setTimeout(console.log('10 secondes'), 10000);
     }
 });

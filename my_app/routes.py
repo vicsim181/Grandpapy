@@ -1,7 +1,7 @@
 from flask import render_template
 from my_app import app
 from .input_parser import parse
-from .google_api import treat_geocoding_answer
+from .google_api import get_google_reverse_geocoding_answer, treat_geocoding_answer
 from .wiki_api import wiki_process
 from flask import jsonify
 import os
@@ -41,9 +41,11 @@ def ajax(message):
     parsed_request = parse(message)
     lat, lng = treat_geocoding_answer(parsed_request)
     wiki_answer, correspondence = wiki_process(parsed_request, lat, lng)
+    address = get_google_reverse_geocoding_answer(lat, lng)
     first_sentence, second_sentence = random_sentence(correspondence)
     return jsonify({
         "first_sentence": first_sentence,
+        "address": address,
         "map": f"https://www.google.com/maps/embed/v1/place?key={GMAPS_KEY}&q={parsed_request}",
         "second_sentence": second_sentence,
         "wiki": wiki_answer

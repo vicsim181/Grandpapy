@@ -2,7 +2,7 @@
 import requests
 import os
 import json
-# import pprint
+import pprint
 
 
 gmaps_key = os.environ['google_maps_key']
@@ -31,7 +31,7 @@ def get_google_geocoding_answer(input_request):
 def get_google_reverse_geocoding_answer(lat, lng):
     parameters = {'latlng': str(lat) + ',' + str(lng), 'key': gmaps_key}
     r = requests.get('https://maps.googleapis.com/maps/api/geocode/json', params=parameters).json()
-    return r
+    return r['results'][0]['formatted_address']
 
 
 def treat_geocoding_answer(input_request):
@@ -49,4 +49,4 @@ def treat_geocoding_answer(input_request):
 
 # essai = 'savoir+opéra+garnier+paris'
 
-# pprint.pprint(treat_geocoding_answer(essai))
+# pprint.pprint(get_google_reverse_geocoding_answer(48.87194, 2.33222))
