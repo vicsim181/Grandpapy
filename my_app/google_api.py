@@ -2,10 +2,7 @@
 import requests
 import os
 import json
-import pprint
-
-
-from requests.models import HTTPError
+# import pprint
 
 
 gmaps_key = os.environ['google_maps_key']

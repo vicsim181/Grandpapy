@@ -1,3 +1,4 @@
+from typing import final
 import requests
 import pprint
 import json
@@ -22,6 +23,7 @@ def get_wiki_answer(lat, lng):
     try:
         r = requests.get(url=url, params=parameters)
         result = r.json()
+        # pprint.pprint(result)
         return result
     except json.decoder.JSONDecodeError:
         print('The json file returned from Wikipedia is empty! It can be due to a HTTP error, check the url passed in requests.')
@@ -37,10 +39,9 @@ def search_for_correspondence(request, answer):
     It checks the words sent to GoogleMaps and the titles of the 10 closest wikipages found around the geographic coordinates sent.
     """
     result = answer['query']['geosearch'][0]['title']
-    print(result)
     treated_request = request.split('+')
     i = 0
-    split_title = result['title'].split(' ')
+    split_title = result.split(' ')
     for word in split_title:
         if word.lower() in treated_request:
             i += 1
@@ -56,21 +57,24 @@ def get_wikipedia_explanations(answer):
     results = answer['query']['geosearch'][0]['title']
     id_page = answer['query']['geosearch'][0]['pageid']
     parameters = {'action': 'query', 'format': 'json', 'prop': 'extracts', 'exintro': True, 'explaintext': True,
-                  'redirects': 1, 'titles': results}
+                  'redirects': 1, 'exsentences': 5, 'titles': results}
     url = 'https://fr.wikipedia.org/w/api.php'
     r = requests.get(url=url, params=parameters).json()
-    # pprint.pprint(r['query']['pages'][str(id_page)]['extract'])
-    return r['query']['pages'][str(id_page)]['extract']
+    final_result = r['query']['pages'][str(id_page)]['extract']
+    detailed_result = list(final_result)
+    detailed_result[0] = detailed_result[0].lower()
+    final_result = "".join(detailed_result)
+    return final_result
 
 
 def wiki_process(request, lat, lng):
     """
     """
-    one = get_wiki_answer(lat, lng)
-    two = search_for_correspondence(request, one)
-    explanations = get_wikipedia_explanations(one)
-    return explanations, two
+    result = get_wiki_answer(lat, lng)
+    correspondence = search_for_correspondence(request, result)
+    explanations = get_wikipedia_explanations(result)
+    return explanations, correspondence
 
 
 # pprint.pprint(wiki_process(request, 48.87194,2.33222))
-# pprint.pprint(wiki_process(request, 48.87194, 2.33222))
+# wiki_process(request, 48.87194, 2.33222)

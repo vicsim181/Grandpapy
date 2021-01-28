@@ -3,9 +3,14 @@ $(()=> {
 });
 
 let i = 0;
+let responseMaps;
+let responseWiki;
+let firstSentence;
+let secondSentence;
 
 
-let getRequest = function() {
+
+function getRequest() {
     message = $('#form').val();
     $('#messages').prepend('<p>' + message);
     const treatedMessage = encodeURIComponent(message);
@@ -14,30 +19,42 @@ let getRequest = function() {
 }
 
 
-let sendRequest = function(request) {
-    $.post(`http://localhost:5000/ajax/${request}`, (data) => {
-        let responseMaps = data['map'];
-        let responseWiki = data['wiki'];
-        console.log('map: ' + responseMaps,
-                    'wiki: ' + responseWiki);
-        showResponse(responseMaps, responseWiki);
-        return responseMaps, responseWiki;    
-    });
+function sendRequest(request) {
+    return $.post(`http://localhost:5000/ajax/${request}`);
+    // return $.ajax({
+    //     'url': `http://localhost:5000/ajax/${request}`,
+        // 'contentType': true,
+        // 'data': request,
+        // 'dataType': 'text',
+        // 'method': 'POST'
+    // })
+    // });
 }
 
 
-let showResponse = function(response1, response2) {
+function assignResults(data) {
+    responseMaps = data['map'];
+    responseWiki = data['wiki'];
+    firstSentence = data['first_sentence'];
+    secondSentence = data['second_sentence'];
+}
+        // console.log('maps: ' + responseMaps,
+        //             'wiki: ' + responseWiki,
+        //             'first: ' + firstSentence,
+        //             'second: ' + secondSentence);
+
+function showResponse(responseMaps, responseWiki, firstSentence, secondSentence) {
+    $('#messages').prepend('<p>' + firstSentence);
     $('#messages').prepend('<iframe id=' + i + '>');
-    // $('iframe').attr('id', i);
-    $('#' + i).attr('src', response1);
+    $('#' + i).attr('src', responseMaps);
     $('#' + i).addClass('googlemap');
     i ++;
+    $('#messages').prepend('<p>' + secondSentence + responseWiki);
     configMaps();
-    $('#messages').prepend('<p>' + response2);
 }
 
 
-let configMaps = function() {
+function configMaps() {
     $('.googlemap').attr('width', '400');
     $('.googlemap').attr('height', '250');
     $('.googlemap').attr('frameborder', '0');
@@ -46,10 +63,23 @@ let configMaps = function() {
 }
 
 
-let displayMessages = function() {
-    let request = getRequest();
-    sendRequest(request);
-    // showResponse(response);
+function failProcess() {
+    console.log('ERREUR, ça ne marche pas !');
+}
+
+
+function displayMessages() {
+    let request = getRequest()
+    sendRequest(request)
+    .then(data => assignResults(data))
+    .then(console.log('maps: ' + responseMaps,
+                      'wiki: ' + responseWiki,
+                      'first: ' + firstSentence,
+                      'second: ' + secondSentence))
+    .then(showResponse)
+    .catch(failProcess);
+    // sendRequest(request)
+    // showResponse(responseMaps, responseWiki, firstSentence, secondSentence);
 }
 
 

@@ -93,9 +93,9 @@ def test_google_api_geocoding_answer(monkeypatch):
     assert result == (48.9244592, 2.3601645)
 
 
-# def test_google_api_revers_answer():
-#     """
-#     Ici on simule la réponse de l'API de Google Maps en lui passant la longitude et latitude obtenue précédement.
-#     On teste le traitement qui sera fait de cette réponse.
-#     """
-#     pass
+def test_google_api_revers_answer():
+    """
+    Ici on simule la réponse de l'API de Google Maps en lui passant la longitude et latitude obtenue précédement.
+    On teste le traitement qui sera fait de cette réponse. L'objectif est de récupérer une adresse précise.
+    """
+    pass
