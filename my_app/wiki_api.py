@@ -23,7 +23,6 @@ def get_wiki_answer(lat, lng):
     try:
         r = requests.get(url=url, params=parameters)
         result = r.json()
-        # pprint.pprint(result)
         return result
     except json.decoder.JSONDecodeError:
         print('The json file returned from Wikipedia is empty! It can be due to a HTTP error, check the url passed in requests.')
@@ -36,7 +35,7 @@ def get_wiki_answer(lat, lng):
 def search_for_correspondence(request, answer):
     """
     This function has the objective to determine if the answers we got from Wikipedia are matching with the request.
-    It checks the words sent to GoogleMaps and the titles of the 10 closest wikipages found around the geographic coordinates sent.
+    It checks the words sent to GoogleMaps and the titles of the closest wikipedia obtained with the geographic coordinates.
     """
     result = answer['query']['geosearch'][0]['title']
     treated_request = request.split('+')
@@ -74,7 +73,3 @@ def wiki_process(request, lat, lng):
     correspondence = search_for_correspondence(request, result)
     explanations = get_wikipedia_explanations(result)
     return explanations, correspondence
-
-
-# pprint.pprint(wiki_process(request, 48.87194,2.33222))
-# wiki_process(request, 48.87194, 2.33222)

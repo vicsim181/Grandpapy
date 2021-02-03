@@ -5,9 +5,9 @@ $(()=> {
 
 function getRequest() {
     message = $('#form').val();
-    $('#messages').prepend('<p>' + message);
+    $('#form').val("");
+    $('.messages').append('<div class="request">' + message);
     const treatedMessage = encodeURIComponent(message);
-    // console.log(treatedMessage);
     return treatedMessage;
 }
 
@@ -18,14 +18,15 @@ async function sendRequest(request) {
 
 
 function showResponse(data) {
-    $('#messages').prepend('<p>' + data['first_sentence'] + data['address'] + '.');
+    $('.messages').append("<div class='answer'>" + data["first_sentence"] + data["address"] + ".");
     setTimeout(() => {
         let iframe = $('<iframe>');
-        $('#messages').prepend(iframe);
+        $('.messages').append(iframe);
         iframe.attr('src', data['map']).addClass('googlemap');
-        $('#messages').prepend('<p>' + data['second_sentence'] + data['wiki']);
+        $('.messages').append('<div class="answer">' + data['second_sentence'] + data['wiki']);
         configMaps();
-    }, 4000);   
+        $('#Layer_1').hide();
+    }, 2000);   
 }
 
 
@@ -42,13 +43,14 @@ async function displayMessages() {
     showResponse(data);
 }
 
-
 $("#button").on('click', async function () {
+    $('#Layer_1').show();
     displayMessages();
 });
 
 $('#form').on('keypress', function(e) {
     if(e.which == 13) {
+        $('#Layer_1').show();
         displayMessages();
     }
 });

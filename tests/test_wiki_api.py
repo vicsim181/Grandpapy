@@ -1,7 +1,7 @@
-from my_app.wiki_api import search_for_element_to_display
+from my_app.wiki_api import get_wikipedia_explanations, search_for_correspondence
 
 
-def mock_get_wiki_answer(input_request):
+def mock_get_wiki_answer(lat, lng):
     answer = {
         "batchcomplete": "",
         "query": {
@@ -68,12 +68,27 @@ def mock_get_wiki_answer(input_request):
 
 def test_treatment_wiki_answer_to_decide_which_element_to_display(monkeypatch):
     """
-    In this test we use the fake json answer given by the mock_get_google_geocoding_answer function above.
-    Ici on va récupérer la réponse ci-dessus pour simuler la réponse de l'API de wikipédia avec une recherche
-    via les coordonnées du Stade de France à Saint-Denis(93).
+    In this test we use the fake json answer given by the mock_get_wiki_answer function above.
+    We are going to check that the function gives us back the first 5 sentences (or less) of the description part of the article.
+    We try with the answer related to the 'Stade de France' in Saint-Denis(93).
     """
-    request = 'donner+adresse+stade+france'
-    answer = mock_get_wiki_answer(request)
+    lat, lng = 48.9244592, 2.3601645
+    answer = mock_get_wiki_answer(lat, lng)
     monkeypatch.setattr('my_app.wiki_api.get_wiki_answer', mock_get_wiki_answer)
-    result = search_for_element_to_display(request, answer)
-    assert result == ('Stade de France', 12.1)
+    result = get_wikipedia_explanations(answer)
+    assert result == """le Stade de France est le plus grand stade français avec 80 698 places en configuration football/rugby. Il se situe dans le quartier de la Plaine Saint-Denis à Saint-Denis, dans la proche banlieue nord de Paris. Il est l'œuvre de quatre architectes : Michel Macary, Aymeric Zublena, Michel Regembal et Claude Costantini. L'architecture de ce stade s'inspire du Worldport de la compagnie aérienne américaine Pan Am qui se situait à l'aéroport international John-F.-Kennedy de New York.
+Il est inauguré le 28 janvier 1998 par Jacques Chirac, président de la République, lors du match de football France - Espagne."""
+
+
+def test_search_for_correspondence(monkeypatch):
+    """
+    In this function we test the ability of the function to determine if the name of the wikipedia pages matches with the request.
+    We need again the fake json result from the mock function above.
+    We try here with the answer related to the 'Stade de France' in Saint-Denis(93).
+    """
+    lat, lng = 48.9244592, 2.3601645
+    request = 'donner+adresse+stade+france'
+    answer = mock_get_wiki_answer(lat, lng)
+    monkeypatch.setattr('my_app.wiki_api.get_wiki_answer', mock_get_wiki_answer)
+    result = search_for_correspondence(request, answer)
+    assert result == 1
