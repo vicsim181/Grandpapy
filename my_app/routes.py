@@ -19,7 +19,7 @@ SENTENCES_PLACE = ["Je connais bien cet endroit ! Tiens par exemple, ",
                    "Ah je me souviens j'y suis déjà allé ! Tu sais, ",
                    "Tiens d'ailleurs à propos de cet endroit que je connais bien, laisse moi te raconter que "]
 # NEGATIVE_ANSWER = [""]
-# googlemaps = Googlemaps()
+googlemaps = Googlemaps()
 wikipedia = Wikipedia()
 parser = Parser()
 

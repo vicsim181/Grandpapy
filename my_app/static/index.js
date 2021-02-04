@@ -19,7 +19,7 @@ function getRequest() {
 
 
 async function sendRequest(request) {
-    return $.post(`http://localhost:5000/ajax/${request}`);
+    return $.post(`http://localhost:5001/ajax/${request}`);
 }
 
 
@@ -59,13 +59,7 @@ async function displayMessages() {
 
 $("#button").on('click', async function () {
     $('#Layer_1').show();
-    try {
-        displayMessages();
-    } catch (error) {
-        if (error instanceof InternalServerError) {
-        $('#Layer_1').hide();
-        };
-    }
+    displayMessages();
 });
 
 $('#form').on('keypress', function(e) {
