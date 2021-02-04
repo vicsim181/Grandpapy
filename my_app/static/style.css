@@ -50,7 +50,7 @@ h2 {
 	padding: .5rem 1rem .75rem;
 	display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 55%;
     max-width: auto;
     font-family: 'amerika', Arial, Helvetica, sans-serif;
     text-align: center;
@@ -71,7 +71,7 @@ h2 {
     margin: 20px 50px 0 50px;
     border: 2px solid black;
     border-radius: 15px;
-    background-color: #c2b8c5;
+    background-color: #a7a4a8;
 }
 
 .messages {
@@ -85,19 +85,17 @@ h2 {
 .answer {
 	background: var(--color-input);
 	padding: .35em 1em;
-	max-width: 60%;
 	border-radius: 5px;
     line-height: 1.25em;
+    max-width: 50%;
     border: 1px solid #a77fb6;
-}
-
-.answer {
-	margin-right: auto;
+    margin-right: auto;
+    text-align: justify;
 }
 
 .answer + .request,
 .request + .answer {
-	margin-top: .5rem;
+    margin-top: .5rem;
 }
 
 .request {
@@ -105,7 +103,9 @@ h2 {
     padding: .35em 1em;
     border: 1px solid #702a0a;
     border-radius: 5px;
-	background: var(--color-highlight);
+    max-width: 50%;
+    background: var(--color-highlight);
+    text-align: justify;
 }
 
 .loader {
@@ -162,7 +162,7 @@ iframe {
 }
 
 .form-container [type="text"]:hover,
-.form-container [type="text"]:visited,
+.form-container [type="text"]:focus,
 .form-container [type="submit"]:hover,
 .form-container [type="submit"]:active {
     color: white;
@@ -179,7 +179,7 @@ svg{
 }
 
 @media all and (max-width: 1260px) {
-    img {
+    #logo {
         position: absolute;
         left: 10px;
         top: 10px;
@@ -218,7 +218,6 @@ svg{
     margin: 5px 5px 0 5px;
     border: 2px solid black;
     border-radius: 15px;
-    background-color: #f9e9ff;
     }
 
     footer {
@@ -230,15 +229,19 @@ svg{
     }
 
     h1 {
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
     h2 {
-        font-size: 1em;
+        font-size: 0.9em;
     }
 
-    header p {
-        display: none;
+    p {
+        font-size: 0.8em;
     }
+
+    /* header p {
+        display: none;
+    } */
 
 }

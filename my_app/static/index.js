@@ -7,8 +7,14 @@ function getRequest() {
     message = $('#form').val();
     $('#form').val("");
     $('.messages').append('<div class="request">' + message);
-    const treatedMessage = encodeURIComponent(message);
-    return treatedMessage;
+    if (message.toLowerCase() === 'salut') {
+        $('#Layer_1').hide();
+        $('.messages').append("<div class='answer'>" + "Salut, tu veux quelque chose ?");
+        return 0;
+    } else {
+        const treatedMessage = encodeURIComponent(message);
+        return treatedMessage;
+    }
 }
 
 
@@ -26,7 +32,7 @@ function showResponse(data) {
         $('.messages').append('<div class="answer">' + data['second_sentence'] + data['wiki']);
         configMaps();
         $('#Layer_1').hide();
-    }, 2000);   
+    }, 2000);
 }
 
 
@@ -39,13 +45,27 @@ function configMaps() {
 
 async function displayMessages() {
     let request = getRequest();
-    let data = await sendRequest(request);
-    showResponse(data);
+    if (request === 0) {
+        return
+    } else {
+        let data = await sendRequest(request);
+        showResponse(data);
+        // let rowPos = $('.answer').last().position();
+        // console.log('position: ' + rowPos);
+        // $('.messages').scrollTop(rowPos.top);
+    }
 }
+
 
 $("#button").on('click', async function () {
     $('#Layer_1').show();
-    displayMessages();
+    try {
+        displayMessages();
+    } catch (error) {
+        if (error instanceof InternalServerError) {
+        $('#Layer_1').hide();
+        };
+    }
 });
 
 $('#form').on('keypress', function(e) {

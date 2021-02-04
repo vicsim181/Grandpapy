@@ -1,15 +1,15 @@
 from flask import render_template
 from my_app import app
-from .input_parser import parse
-from .google_api import get_google_reverse_geocoding_answer, treat_geocoding_answer
-from .wiki_api import wiki_process
+from .parser import Parser
+from .google_api import Googlemaps
+from .wiki_api import Wikipedia
 from flask import jsonify
 import os
 import random
 
 
 GMAPS_KEY = os.environ['google_maps_key']
-SENTENCES_FIRST_ANSWER = ["Et voilà l'adresse demandée en un temps record !",
+SENTENCES_FIRST_ANSWER = ["Et voilà l'adresse demandée en un temps record ! ",
                           "Et paf ! En un rien de temps je t'ai trouvé tout ça, voici l'adresse: ",
                           "Regarde ce que j'ai pour toi... Une adresse !! "]
 SENTENCES_AROUND = ["Je n'ai jamais été visiter cet endroit. Mais j'en connais des choses ! Par exemple, ",
@@ -18,9 +18,19 @@ SENTENCES_AROUND = ["Je n'ai jamais été visiter cet endroit. Mais j'en connais
 SENTENCES_PLACE = ["Je connais bien cet endroit ! Tiens par exemple, ",
                    "Ah je me souviens j'y suis déjà allé ! Tu sais, ",
                    "Tiens d'ailleurs à propos de cet endroit que je connais bien, laisse moi te raconter que "]
+# NEGATIVE_ANSWER = [""]
+# googlemaps = Googlemaps()
+wikipedia = Wikipedia()
+parser = Parser()
 
 
 def random_sentence(correspondence):
+    """
+    Depending on the correspondence results get from the Wikipedia class, we assign a sentence to the answer.
+    If the wikipedia article doesn't match enough with the request, we send one of the SENTENCES_AROUND.
+    If it matches enough, we wend one of the SENTENCES_PLACE.
+    It also select a random sentence from the SENTENCES_FIRST_ANSWER to give as a direct answer when displaying the address.
+    """
     first_sentence = random.choice(SENTENCES_FIRST_ANSWER)
     if correspondence == 1:
         second_sentence = random.choice(SENTENCES_PLACE)
@@ -33,15 +43,25 @@ def random_sentence(correspondence):
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home/', methods=('GET', 'POST'))
 def home():
+    """
+    Display the home page of the website.
+    """
     return render_template('home.html')
 
 
 @app.route('/ajax/<message>', methods=('GET', 'POST'))
 def ajax(message):
-    parsed_request = parse(message)
-    lat, lng = treat_geocoding_answer(parsed_request)
-    wiki_answer, correspondence = wiki_process(parsed_request, lat, lng)
-    address = get_google_reverse_geocoding_answer(lat, lng)
+    """
+    Called when an input is sent through the form on the main page.
+    The function calls the differents classes linked to the needed APIs.
+    Gives back the results obtained in a JSON file.
+    """
+    parsed_request = parser.parse(message)
+    lat, lng = googlemaps.google_process(parsed_request)
+    wiki_answer, correspondence = wikipedia.wiki_process(parsed_request, lat, lng)
+    googlemaps.get_google_reverse_geocoding_answer(lat, lng)
+    googlemaps.treat_reverse_geocoding()
+    address = googlemaps.reverse_treated
     first_sentence, second_sentence = random_sentence(correspondence)
     return jsonify({
         "first_sentence": first_sentence,
