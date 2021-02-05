@@ -5,7 +5,7 @@ class Test_Google_Maps():
     """
     Class holding the test functions about the GoogleMaps script (google_api.py).
     """
-    def mock_get_google_geocoding_answer(self, user_input):
+    def mock_get_google_geocoding_answer(self):
         self.answer = {
             "results": [
                 {
@@ -84,21 +84,23 @@ class Test_Google_Maps():
             "status": "OK"
         }
 
-    def test_google_process(self, monkeypatch):
+    def test_google_process(self):
         """
         In this test we use the fake json answer given by the mock_get_google_geocoding_answer function above.
         It replaces the answer we get from the GMaps API with the input of 'donner+adresse+stade+france'.
         We test the function treat_google_answer() which receives the json received from the API and the result it gives us.
         """
         googlemaps_test = Googlemaps()
-        user_input = 'donner+stade+france'
-        monkeypatch.setattr('my_app.google_api.Googlemaps.get_google_geocoding_answer',
-                            self.mock_get_google_geocoding_answer)
-        result = googlemaps_test.google_process(user_input)
+        # user_input = 'donner+stade+france'
+        self.mock_get_google_geocoding_answer()
+        googlemaps_test.result = self.answer
+        # monkeypatch.setattr('my_app.google_api.Googlemaps.get_google_geocoding_answer',
+        #                     self.mock_get_google_geocoding_answer)
+        result = googlemaps_test.treat_geocoding_answer()
         assert result == (48.9244592, 2.3601645)
 
-    def mock_get_google_reverse_geocoding_answer(self, lat, lng):
-        reverse_answer = {'plus_code': {'compound_code': 'W9F6+Q3 Saint-Denis, France',
+    def mock_get_google_reverse_geocoding_answer(self):
+        self.reverse_answer = {'plus_code': {'compound_code': 'W9F6+Q3 Saint-Denis, France',
                                 'global_code': '8FW4W9F6+Q3'},
                   'results': [{'address_components': [{'long_name': '360',
                                                     'short_name': '360',
@@ -356,7 +358,6 @@ class Test_Google_Maps():
                                             'global_code': '8FW4W9F6+Q3'},
                             'types': ['plus_code']}],
                 'status': 'OK'}
-        return reverse_answer
 
 
     def test_treat_google_api_reverse(self):
@@ -365,7 +366,8 @@ class Test_Google_Maps():
 
         """
         googlemaps_reverse = Googlemaps()
-        googlemaps_reverse.reverse_answer = self.mock_get_google_reverse_geocoding_answer(48.9244592, 2.3601645)
+        self.mock_get_google_reverse_geocoding_answer()
+        googlemaps_reverse.reverse = self.reverse_answer 
         result = googlemaps_reverse.treat_reverse_geocoding()
         assert result == '360 Avenue du Président Wilson, 93200 Saint-Denis, France'
 
