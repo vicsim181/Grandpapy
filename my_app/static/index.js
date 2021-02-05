@@ -2,24 +2,35 @@ $(()=> {
     console.log( "ready!" );
 });
 
+function treatInput(inputToTreat) {
+    let specCar = ['{', '}', '<', '>', '&', '/']
+    for (let cars = 0; cars < inputToTreat.length; cars++) {
+        if (specCar.indexOf(inputToTreat[cars]) !== -1) {
+            inputToTreat = inputToTreat.replace(inputToTreat[cars], '');
+        };
+    };
+    return inputToTreat;
+}
+
 
 function getRequest() {
     message = $('#form').val();
     $('#form').val("");
-    $('.messages').append('<div class="request">' + message);
-    if (message.toLowerCase() === 'salut') {
+    messageTreated = treatInput(message);
+    $('.messages').append('<div class="request">' + messageTreated);
+    if (messageTreated.toLowerCase() === 'salut') {
         $('#Layer_1').hide();
         $('.messages').append("<div class='answer'>" + "Salut, tu veux quelque chose ?");
         return 0;
     } else {
-        const treatedMessage = encodeURIComponent(message);
-        return treatedMessage;
+        const encodedMessage = encodeURIComponent(message);
+        return encodedMessage;
     }
 }
 
 
 async function sendRequest(request) {
-    return $.post(`http://localhost:5001/ajax/${request}`);
+    return $.post(`http://localhost:5000/ajax/${request}`);
 }
 
 
@@ -36,6 +47,11 @@ function showResponse(data) {
 }
 
 
+function showErrorSentence(sentence) {
+    $('#Layer_1').hide();
+    $('.messages').append("<div class='answer'>" + sentence + ".");
+}
+
 function configMaps() {
     $('.googlemap').attr('frameborder', '0');
     $('.googlemap').attr('style', 'border:0');
@@ -46,10 +62,19 @@ function configMaps() {
 async function displayMessages() {
     let request = getRequest();
     if (request === 0) {
-        return
+        return;
     } else {
-        let data = await sendRequest(request);
-        showResponse(data);
+        try {
+            let data = await sendRequest(request);
+            if (data['status'] === 1) {
+                showResponse(data);
+            } else if (data['status'] === 0) {
+                showErrorSentence(data['first_sentence']);
+            }
+        } catch(error) {
+            $('#Layer_1').hide();
+            $('.messages').append("<div class='answer'>" + "Désolé mais je ne suis pas en état de te répondre...");
+        }
         // let rowPos = $('.answer').last().position();
         // console.log('position: ' + rowPos);
         // $('.messages').scrollTop(rowPos.top);

@@ -75,9 +75,9 @@ class Test_wikipedia():
         We are going to check that the function gives us back the first 5 sentences (or less) of the description part of the article.
         We try with the answer related to the 'Stade de France' in Saint-Denis(93).
         """
-        wiki_test = Wikipedia()
+        # wiki_test = Wikipedia()
         lat, lng = 48.9244592, 2.3601645
-        answer = self.mock_get_wiki_answer(lat, lng)
+        wiki_test.answer = self.mock_get_wiki_answer(lat, lng)
         monkeypatch.setattr('my_app.wiki_api.Wikipedia.get_wiki_answer', self.mock_get_wiki_answer)
         result = wiki_test.get_wikipedia_explanations()
         assert result == """le Stade de France est le plus grand stade français avec 80 698 places en configuration football/rugby. Il se situe dans le quartier de la Plaine Saint-Denis à Saint-Denis, dans la proche banlieue nord de Paris. Il est l'œuvre de quatre architectes : Michel Macary, Aymeric Zublena, Michel Regembal et Claude Costantini. L'architecture de ce stade s'inspire du Worldport de la compagnie aérienne américaine Pan Am qui se situait à l'aéroport international John-F.-Kennedy de New York.

@@ -12,7 +12,6 @@ class Test_parser():
         """
         parser_test = Parser()
         message = "Salut, je suis une phrase d'exemple pour tester la fonction parser. Voici une question : Peux-tu, s'il-te-plait Grandpy me donner l'adresse du Stade de France ? Merci !"
-        # message_cleaned = parser_test.cleaning(message)
         assert parser_test.cleaning(message) == 'salut  je suis une phrase d exemple pour tester la fonction parser  voici une question   peux tu  s il te plait grandpy me donner l adresse du stade de france   merci  '
 
     def test_parse(self):

@@ -18,7 +18,7 @@ SENTENCES_AROUND = ["Je n'ai jamais été visiter cet endroit. Mais j'en connais
 SENTENCES_PLACE = ["Je connais bien cet endroit ! Tiens par exemple, ",
                    "Ah je me souviens j'y suis déjà allé ! Tu sais, ",
                    "Tiens d'ailleurs à propos de cet endroit que je connais bien, laisse moi te raconter que "]
-# NEGATIVE_ANSWER = [""]
+ERROR_SENTENCES = ['Désolé mon petit je ne peux pas te répondre pour le moment !', "Tu m'excuses mais je n'ai pas la tête à répondre à tes questions !"]
 googlemaps = Googlemaps()
 wikipedia = Wikipedia()
 parser = Parser()
@@ -64,9 +64,30 @@ def ajax(message):
     address = googlemaps.reverse_treated
     first_sentence, second_sentence = random_sentence(correspondence)
     return jsonify({
+        "status": 1,
         "first_sentence": first_sentence,
         "address": address,
         "map": f"https://www.google.com/maps/embed/v1/place?key={GMAPS_KEY}&q={parsed_request}",
         "second_sentence": second_sentence,
         "wiki": wiki_answer
     })
+
+
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     error_sentence = random.choice(ERROR_SENTENCES)
+#     print("l'erreur est: ", str(error))
+#     return jsonify({
+#         'status': 0,
+#         'first_sentence': error_sentence
+#     })
+
+
+# @app.errorhandler(500)
+# def internal_error(error):
+#     error_sentence = random.choice(ERROR_SENTENCES)
+#     print("l'erreur est: ", str(error))
+#     return jsonify({
+#         'status': 0,
+#         'first_sentence': error_sentence
+#     })
