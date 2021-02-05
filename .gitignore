@@ -1,1 +1,7 @@
-env1/
+envp7/
+.vscode/
+essai/
+*.pyc
+__pycache__
+.flaskenv
+.gitattributes
