@@ -363,13 +363,9 @@ class Test_Google_Maps():
     def test_treat_google_api_reverse(self):
         """
         In this function we test the 'get_google_reverse_geocoding_answer' from the Googlemaps class.
-
         """
         googlemaps_reverse = Googlemaps()
         self.mock_get_google_reverse_geocoding_answer()
         googlemaps_reverse.reverse = self.reverse_answer 
         result = googlemaps_reverse.treat_reverse_geocoding()
         assert result == '360 Avenue du Président Wilson, 93200 Saint-Denis, France'
-
-
-
