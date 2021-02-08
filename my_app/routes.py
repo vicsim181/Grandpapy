@@ -8,7 +8,7 @@ import os
 import random
 
 
-GMAPS_KEY = os.environ['google_maps_key']
+GMAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
 SENTENCES_FIRST_ANSWER = ["Et voilà l'adresse demandée en un temps record ! ",
                           "Et paf ! En un rien de temps je t'ai trouvé tout ça, voici l'adresse: ",
                           "Regarde ce que j'ai pour toi... Une adresse !! "]
