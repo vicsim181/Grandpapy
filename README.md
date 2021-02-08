@@ -15,3 +15,5 @@ Wikipedia is supposed to give back the closest page registered from the geograph
 Unfortunately it seems this research with the Wikipedia API is not great and therefore not totally reliable.
 
 # **How to use the app?
+
+Let's see
