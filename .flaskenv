@@ -1,2 +1,0 @@
-FLASK_APP=grandpy.py
-FLASK_ENV=development
