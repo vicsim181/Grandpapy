@@ -8,7 +8,7 @@ import os
 import random
 
 
-GMAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
+GMAPS_KEY_FRONT = os.environ['GOOGLE_MAPS_KEY_FRONT']
 SENTENCES_FIRST_ANSWER = ["Et voilà l'adresse demandée en un temps record ! ",
                           "Et paf ! En un rien de temps je t'ai trouvé tout ça, voici l'adresse: ",
                           "Regarde ce que j'ai pour toi... Une adresse !! "]
@@ -67,7 +67,7 @@ def ajax(message):
         "status": 1,
         "first_sentence": first_sentence,
         "address": address,
-        "map": f"https://www.google.com/maps/embed/v1/place?key={GMAPS_KEY}&q={parsed_request}",
+        "map": f"https://www.google.com/maps/embed/v1/place?key={GMAPS_KEY_FRONT}&q={parsed_request}",
         "second_sentence": second_sentence,
         "wiki": wiki_answer
     })
