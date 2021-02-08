@@ -32,7 +32,7 @@ function getRequest() {
 
 
 async function sendRequest(request) {
-    return $.post(`/ajax/${request}`);
+    return $.post(`https://grandpapy.herokuapp.com/ajax/${request}`);
 }
 
 
