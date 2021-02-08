@@ -71,3 +71,23 @@ def ajax(message):
         "second_sentence": second_sentence,
         "wiki": wiki_answer
     })
+
+
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     error_sentence = random.choice(ERROR_SENTENCES)
+#     print("l'erreur est: ", str(error))
+#     return jsonify({
+#         'status': 0,
+#         'first_sentence': error_sentence
+#     })
+
+
+# @app.errorhandler(500)
+# def internal_error(error):
+#     error_sentence = random.choice(ERROR_SENTENCES)
+#     print("l'erreur est: ", str(error))
+#     return jsonify({
+#         'status': 0,
+#         'first_sentence': error_sentence
+#     })
