@@ -5,3 +5,4 @@ essai/
 __pycache__
 .flaskenv
 .gitattributes
+.pytest_cache
