@@ -8,7 +8,7 @@ import os
 import random
 
 
-GMAPS_KEY = os.environ['google_maps_key']
+GMAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
 SENTENCES_FIRST_ANSWER = ["Et voilà l'adresse demandée en un temps record ! ",
                           "Et paf ! En un rien de temps je t'ai trouvé tout ça, voici l'adresse: ",
                           "Regarde ce que j'ai pour toi... Une adresse !! "]
@@ -71,23 +71,3 @@ def ajax(message):
         "second_sentence": second_sentence,
         "wiki": wiki_answer
     })
-
-
-# @app.errorhandler(404)
-# def not_found_error(error):
-#     error_sentence = random.choice(ERROR_SENTENCES)
-#     print("l'erreur est: ", str(error))
-#     return jsonify({
-#         'status': 0,
-#         'first_sentence': error_sentence
-#     })
-
-
-# @app.errorhandler(500)
-# def internal_error(error):
-#     error_sentence = random.choice(ERROR_SENTENCES)
-#     print("l'erreur est: ", str(error))
-#     return jsonify({
-#         'status': 0,
-#         'first_sentence': error_sentence
-#     })
