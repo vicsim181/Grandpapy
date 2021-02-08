@@ -14,3 +14,4 @@ These coordinates are used to make a geographical research on Wikipedia.
 Wikipedia is supposed to give back the closest page registered from the geographic coordinates.
 Unfortunately it seems this research with the Wikipedia API is not great and therefore not totally reliable.
 
+# **How to use the app?
