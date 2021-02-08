@@ -14,6 +14,16 @@ These coordinates are used to make a geographical research on Wikipedia.
 Wikipedia is supposed to give back the closest page registered from the geographic coordinates.
 Unfortunately it seems this research with the Wikipedia API is not great and therefore not totally reliable.
 
-# **How to use the app?
+# **How to use the app?**
 
-Let's see
+## The APIs
+
+To communicate with the different APIs of Google Maps and Wikipedia, you will need the Requests library.
+You can install it with 
+```bash
+> python -m pip install requests
+```
+For more informations, check the documentation: https://requests.readthedocs.io/en/master/
+
+
+
