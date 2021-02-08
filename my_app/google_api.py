@@ -8,7 +8,7 @@ class Googlemaps():
     Class holding the GoogleMaps section, calling the API and treating the answer.
     """
 
-    GMAPS_KEY = os.environ['google_maps_key']
+    GMAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
 
     def __init__(self):
         pass
