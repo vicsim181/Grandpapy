@@ -32,7 +32,7 @@ function getRequest() {
 
 
 async function sendRequest(request) {
-    return $.post(`http://0.0.0.0:5000/ajax/${request}`);
+    return $.post(`http://0.0.0.0:3286/ajax/${request}`);
 }
 
 
