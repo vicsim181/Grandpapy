@@ -25,7 +25,6 @@ class Googlemaps():
         try:
             r = requests.get(url=url, params=parameters)
             self.result = r.json()
-            return self.result
         except json.decoder.JSONDecodeError:
             print('The json file returned from Google Maps is empty! It can be due to a HTTP error, check the url passed in requests.')
             exit()
@@ -40,7 +39,6 @@ class Googlemaps():
         """
         parameters = {'latlng': str(lat) + ',' + str(lng), 'key': Googlemaps.GMAPS_KEY}
         self.reverse = requests.get('https://maps.googleapis.com/maps/api/geocode/json', params=parameters).json()
-        return self.reverse
 
     def treat_geocoding_answer(self):
         """
