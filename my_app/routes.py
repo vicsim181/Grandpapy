@@ -1,7 +1,7 @@
 from flask import render_template
 from my_app import app
 from .parser import Parser
-from .google_api import Googlemaps, GMAPS_KEY_FRONT
+from .google_api import Googlemaps
 from .wiki_api import Wikipedia
 from flask import jsonify
 import random
@@ -65,7 +65,7 @@ def ajax(message):
         "status": 1,
         "first_sentence": first_sentence,
         "address": address,
-        "map": f"https://www.google.com/maps/embed/v1/place?key={GMAPS_KEY_FRONT}&q={parsed_request}",
+        "map": f"https://www.google.com/maps/embed/v1/place?key={Googlemaps.GMAPS_KEY_FRONT}&q={parsed_request}",
         "second_sentence": second_sentence,
         "wiki": wiki_answer
     })
