@@ -9,6 +9,7 @@ class Googlemaps():
     """
 
     GMAPS_KEY = os.environ['GOOGLE_MAPS_KEY']
+    GMAPS_KEY_FRONT = os.environ['GOOGLE_MAPS_KEY_FRONT']
 
     def __init__(self):
         pass

@@ -1,14 +1,12 @@
 from flask import render_template
 from my_app import app
 from .parser import Parser
-from .google_api import Googlemaps
+from .google_api import Googlemaps, GMAPS_KEY_FRONT
 from .wiki_api import Wikipedia
 from flask import jsonify
-import os
 import random
 
 
-GMAPS_KEY_FRONT = os.environ['GOOGLE_MAPS_KEY_FRONT']
 SENTENCES_FIRST_ANSWER = ["Et voilà l'adresse demandée en un temps record ! ",
                           "Et paf ! En un rien de temps je t'ai trouvé tout ça, voici l'adresse: ",
                           "Regarde ce que j'ai pour toi... Une adresse !! "]
