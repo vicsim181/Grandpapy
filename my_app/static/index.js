@@ -83,7 +83,8 @@ async function displayMessages() {
 }
 
 
-$("#button").on('click', async function () {
+$("#button").on('click', async function (event) {
+    event.preventDefault();
     $('#Layer_1').show();
     await displayMessages();
     setTimeout(() => {
