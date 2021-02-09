@@ -91,11 +91,8 @@ class Test_Google_Maps():
         We test the function treat_google_answer() which receives the json received from the API and the result it gives us.
         """
         googlemaps_test = Googlemaps()
-        # user_input = 'donner+stade+france'
         self.mock_get_google_geocoding_answer()
         googlemaps_test.result = self.answer
-        # monkeypatch.setattr('my_app.google_api.Googlemaps.get_google_geocoding_answer',
-        #                     self.mock_get_google_geocoding_answer)
         result = googlemaps_test.treat_geocoding_answer()
         assert result == (48.9244592, 2.3601645)
 
