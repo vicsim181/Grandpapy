@@ -22,7 +22,7 @@ Unfortunately it seems this research with the Wikipedia API is not great and the
 **To install a development version runing with flask, check the flask branch, check the [flask documentation](https://flask.palletsprojects.com/en/1.1.x/).**
 
 **To install a production version runing on Heroku, check the main branch, check the [Heroku documentation](https://www.heroku.com/).**
-
+  
 
 Fork the repo or download the files and install the dependencies with:
 ```bash
@@ -32,7 +32,7 @@ Fork the repo or download the files and install the dependencies with:
 ## The APIs
 
 To communicate with the different APIs of Google Maps and Wikipedia, you will need the Requests library.
-You can install it with 
+You can install it with:
 ```bash
 > python -m pip install requests
 ```
@@ -67,5 +67,33 @@ In the index.js file in the static/ folder, be sure to set the url in the 'sendR
 async function sendRequest(request) {
     return $.post(`http://localhost:5000/ajax/${request}`);
 }
+```
+
+You can then initiate your flask server via the terminal like this:
+```bash
+>flask run --host=localhost
+```
+
+## On Heroku
+
+If you wish to deploy your own version on Heroku, you will need to create an account.  
+You can link your Github main/master repo with your project in Heroku.  
+
+You can also settle your environment variables directly in the Heroku dashboard, located in the settings of your Heroku account.  
+It is also possible to set the variables directly in the terminal via:
+```bash
+>heroku config:set MY_KEY=valueofthekey
+```
+
+For more information about the Heroku functions and principles, check the [documentation]().  
+
+For the deployment, follow the instructions in the Heroku documentation.
+In case of fail, you can check the logs with:
+```bash
+>heroku logs
+```
+or
+```bash
+>heroku logs --tail
 ```
 
