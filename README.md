@@ -16,6 +16,14 @@ Unfortunately it seems this research with the Wikipedia API is not great and the
 
 # **How to use the app?**
 
+# Install it
+
+Fork the repo or download the files and install the dependencies with:
+```bash
+> pip install -r requirements.txt
+```
+
+
 ## The APIs
 
 To communicate with the different APIs of Google Maps and Wikipedia, you will need the Requests library.
@@ -25,5 +33,6 @@ You can install it with
 ```
 For more informations, check the documentation: https://requests.readthedocs.io/en/master/
 
-
+The Google Maps API used in this project is the following: https://developers.google.com/maps/documentation/geocoding/overview?hl=fr
+You will need to set an API key
 
