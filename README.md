@@ -35,16 +35,14 @@ You can install it with
 ```
 For more informations, check the [documentation](https://requests.readthedocs.io/en/master/).
 
-There are two Google Maps API used in this project, the first one is the [Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview?hl=fr).
-The second one is the [Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started).  
+There are two Google Maps API used in this project, the first one is the [Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview?hl=fr), the second one is the [Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started).  
 You will need to set an API key on the [Google Cloud Platform](https://console.cloud.google.com/getting-started) in order to use them.
 
-It's recommended to use two API keys, one for the back-end and one for the front-end.
-The back-end key can be restricted to the Geocoding API use only, it will be set as an environment variable on your machine and won't appear in the code.
-The front-end key can be restricted to the Maps Embed API use only, but also with the HTTP url of your heroku page once deployed. 
+It's recommended to use two API keys, one for the back-end and one for the front-end.  
+The back-end key can be restricted to the Geocoding API use only, it will be set as an environment variable on your machine and won't appear in the code.  
+The front-end key can be restricted to the Maps Embed API use only, but also with the HTTP url of your heroku page once deployed.
 
-For the Wikipedia part you will interact with its [API](https://www.mediawiki.org/wiki/API:Main_page).
-There is no need of API key to use the Wikipedia one.
+For the Wikipedia part you will interact with its [API](https://www.mediawiki.org/wiki/API:Main_page), there is no need of API key to use the Wikipedia one.
 
 In this project those keys have been set as Environment Variables, they are imported in the scripts a follow:
 ```python
@@ -53,4 +51,6 @@ api_key = os.environ['environment_variable_name']
 ```
 
 (Same principle for the flask secret key in the config.py file.)
+
+The interaction with those APIs is managed separately in two scripts, one for the GoogleMaps part and another dedicated to the Wikipedia part.
 
