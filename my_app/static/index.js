@@ -83,7 +83,7 @@ async function displayMessages() {
 }
 
 
-$("#button").on('click', async function (e) {
+$("#button").on('click', async function () {
     $('#Layer_1').show();
     await displayMessages();
     setTimeout(() => {
