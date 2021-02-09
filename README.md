@@ -35,9 +35,8 @@ You can install it with
 ```
 For more informations, check the [documentation](https://requests.readthedocs.io/en/master/).
 
-There are two Google Maps API used in this project.
-The first one is the [Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview?hl=fr).
-The second one is the [Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started).
+There are two Google Maps API used in this project, the first one is the [Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview?hl=fr).
+The second one is the [Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started).  
 You will need to set an API key on the [Google Cloud Platform](https://console.cloud.google.com/getting-started) in order to use them.
 
 It's recommended to use two API keys, one for the back-end and one for the front-end.
