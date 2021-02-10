@@ -31,12 +31,8 @@ Fork the repo or download the files and install the dependencies with:
 
 ## The APIs
 
-To communicate with the different APIs of Google Maps and Wikipedia, you will need the Requests library.
-You can install it with:
-```bash
-> python -m pip install requests
-```
-For more informations, check the [documentation](https://requests.readthedocs.io/en/master/).
+To communicate with the different APIs of Google Maps and Wikipedia, you will need the Requests library.  
+For more informations, check the [documentation](https://requests.readthedocs.io/en/master/).  
 
 There are two Google Maps API used in this project, the first one is the [Geocoding API](https://developers.google.com/maps/documentation/geocoding/overview?hl=fr), the second one is the [Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started).  
 You will need to set an API key on the [Google Cloud Platform](https://console.cloud.google.com/getting-started) in order to use them.
