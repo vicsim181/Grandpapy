@@ -25,8 +25,13 @@ Unfortunately it seems this research with the Wikipedia API is not great and the
   
 
 Fork the repo or download the files and install the dependencies with:
+On Windows:
 ```bash
 > pip install -r requirements.txt
+```
+On Linux:
+```bash
+> pip3 install -r requirements.txt
 ```
 
 ## The APIs
