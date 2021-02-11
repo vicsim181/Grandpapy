@@ -24,7 +24,7 @@ Unfortunately it seems this research with the Wikipedia API is not great and the
 **To install a production version runing on Heroku, check the main branch, check the [Heroku documentation](https://www.heroku.com/).**
   
 
-Fork the repo or download the files and install the dependencies with:
+Fork the repo or download the files and install the dependencies with:  
 On Windows:
 ```bash
 > pip install -r requirements.txt
